@@ -1,11 +1,14 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   return (
-    <div className="login-page d-flex justify-content-center mt-5">
+    <div className="login-page d-flex justify-content-center mt-1 mb-5">
       <div className="login-form mt-5 shadow-lg rounded p-5">
         <h3 className="text-center">Welcome</h3>
+        <hr />
+
         <Form>
           <Form.Group className="mb-2" controlId="formbasicFirstName">
             <Form.Label>First Name</Form.Label>
@@ -32,8 +35,11 @@ export const Register = () => {
             <Form.Control type="email" placeholder="Retype Password please" />
           </Form.Group>
           <Button variant="primary" type="submit" className="p-1 ">
-            Login
+            Register
           </Button>
+          <div className="text-end">
+            Already registered?<Link to="/login">Login</Link>
+          </div>
         </Form>
       </div>
     </div>

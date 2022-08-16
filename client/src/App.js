@@ -1,5 +1,5 @@
 import "./App.css";
-import { Button, Container } from "react-bootstrap";
+// import { Button, Container } from "react-bootstrap";
 import { Login } from "./components/Login";
 import { Dashboard } from "./components/Dashboard";
 import { Register } from "./components/Register";
@@ -10,8 +10,8 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <div>
-      <MainLayout />
       <BrowserRouter>
+        <MainLayout />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />

@@ -1,26 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const Register = () => {
+  const initialState = {
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+    confirmPass: "",
+  };
+  const [form, setForm] = useState(initialState);
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    // console.log(name, value);
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    console.log("Register");
+    console.log(form);
+    setForm(initialState);
+  };
+
   return (
     <div className="login-page d-flex justify-content-center mt-1 mb-5">
       <div className="login-form mt-5 shadow-lg rounded p-5">
         <h3 className="text-center">Welcome</h3>
         <hr />
 
-        <Form>
+        <Form onSubmit={handleOnSubmit}>
           <Form.Group className="mb-2" controlId="formbasicFirstName">
             <Form.Label>First Name</Form.Label>
-            <Form.Control type="text" placeholder="first name" />
+            <Form.Control
+              required
+              type="text"
+              placeholder="fname"
+              onChange={handleOnChange}
+              name="fname"
+              value={form.fname}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formbasicLastName">
             <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="last name" />
+            <Form.Control
+              required
+              type="text"
+              placeholder="lname"
+              onChange={handleOnChange}
+              name="lname"
+              value={form.lname}
+            />
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formbasicemail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Email please" />
+            <Form.Control
+              required
+              type="email"
+              placeholder="Email please"
+              onChange={handleOnChange}
+              name="email"
+              value={form.email}
+            />
             <Form.Text className="text-muted">
               We will never share your email to anyone
             </Form.Text>
@@ -28,11 +72,25 @@ export const Register = () => {
 
           <Form.Group className="mb-3" controlId="formbasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="email" placeholder="Password please" />
+            <Form.Control
+              required
+              type="password"
+              placeholder="Password please"
+              onChange={handleOnChange}
+              name="password"
+              value={form.password}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formbasicConfirmPassword">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="email" placeholder="Retype Password please" />
+            <Form.Control
+              required
+              name="confirmPass"
+              type="password"
+              placeholder="Retype Password please"
+              onChange={handleOnChange}
+              value={form.confirmPass}
+            />
           </Form.Group>
           <Button variant="primary" type="submit" className="p-1 ">
             Register

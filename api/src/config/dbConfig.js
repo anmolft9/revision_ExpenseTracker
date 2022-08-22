@@ -9,4 +9,3 @@ export const connectDB = () => {
     console.log(error);
   }
 };
-mongoose.client;

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { postNewUser } from "../helpers/axiosHelper.js";
+import { toast } from "react-toastify";
 
 export const Register = () => {
   const initialState = {
@@ -11,6 +13,7 @@ export const Register = () => {
     confirmPass: "",
   };
   const [form, setForm] = useState(initialState);
+  const [resp, setResp] = useState({});
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -18,20 +21,34 @@ export const Register = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     console.log("Register");
-    console.log(form);
-    setForm(initialState);
+    // console.log(form);
+    const { confirmPass, ...rest } = form;
+    if (confirmPass != rest.password) {
+      return alert("password doesnot match");
+    }
+    const { status, message } = await postNewUser(rest);
+    setResp({ status, message });
+
+    toast[status](message);
+    status === "success" && setForm(initialState);
   };
 
   return (
     <div className="login-page d-flex justify-content-center mt-1 mb-5">
       <div className="login-form mt-5 shadow-lg rounded p-5">
-        <h3 className="text-center">Welcome</h3>
+        <h3 className="text-center">Register New User</h3>
         <hr />
 
         <Form onSubmit={handleOnSubmit}>
+          {resp.message && (
+            <Alert variant={resp.status === "success" ? "success" : "danger"}>
+              {resp.message}
+            </Alert>
+          )}
+
           <Form.Group className="mb-2" controlId="formbasicFirstName">
             <Form.Label>First Name</Form.Label>
             <Form.Control

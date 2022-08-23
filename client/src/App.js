@@ -6,6 +6,8 @@ import { Register } from "./components/Register";
 import { MainLayout } from "./components/layout/MainLayout";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }

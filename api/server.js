@@ -27,6 +27,15 @@ app.use("/", (req, res, next) => {
     console.log(error);
   }
 });
+
+app.use((error, req, res, next) => {
+  const status = error.status || 404;
+  res.status(status).json({
+    status: "error",
+    message: error.message,
+  });
+});
+
 app.listen(PORT, (error) => {
   if (error) {
     console.log(error);

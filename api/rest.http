@@ -9,7 +9,7 @@ Content-Type: application/json
 {
     "fname":"anmol",
     "lname":"bhattarai",
-    "email":"anmol@anmol.com",
+    "email":"a@anmol.com",
     "password":"anmol"
     
    

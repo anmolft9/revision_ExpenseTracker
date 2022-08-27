@@ -40,6 +40,6 @@ app.listen(PORT, (error) => {
   if (error) {
     console.log(error);
   } else {
-    console.log(`connected at http::localhost:${PORT}`);
+    console.log(`server connected at http::localhost:${PORT}`);
   }
 });

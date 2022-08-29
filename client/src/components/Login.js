@@ -1,16 +1,23 @@
 import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { loginUser } from "../helpers/axiosHelper";
+import { toast } from "react-toastify";
 
 export const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     // console.log(email, password);
+
+    const { status, message, response } = await loginUser({ email, password });
+    toast[status](message);
+    console.log(response);
+    status === "success" && localStorage.setItem("user", response);
   };
 
   return (

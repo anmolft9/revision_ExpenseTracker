@@ -26,15 +26,20 @@ router.post("/login", async (req, res, next) => {
     const { email, password } = req.body;
 
     const user = await getUser({ email });
-    user?.password === password
-      ? res.json({
-          status: "success",
-          message: "matched",
-        })
-      : res.json({
-          status: "error",
-          message: "no match",
-        });
+
+    if (user?.password === password) {
+      user.password = undefined;
+      return res.json({
+        status: "success",
+        message: "matched",
+        user,
+      });
+    }
+
+    res.json({
+      status: "error",
+      message: "no match",
+    });
   } catch (error) {
     next(error);
   }

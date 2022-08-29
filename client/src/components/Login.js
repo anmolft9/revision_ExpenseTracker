@@ -1,12 +1,13 @@
 import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../helpers/axiosHelper";
 import { toast } from "react-toastify";
 
 export const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const navigate = useNavigate();
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -14,10 +15,13 @@ export const Login = () => {
     const password = passwordRef.current.value;
     // console.log(email, password);
 
-    const { status, message, response } = await loginUser({ email, password });
+    const { status, message, user } = await loginUser({ email, password });
     toast[status](message);
-    console.log(response);
-    status === "success" && localStorage.setItem("user", response);
+    console.log(user, status);
+    if (status === "success") {
+      window.sessionStorage.setItem("somethingELse", JSON.stringify(user));
+      navigate("/dashboard");
+    }
   };
 
   return (

@@ -13,7 +13,6 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <MainLayout />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />

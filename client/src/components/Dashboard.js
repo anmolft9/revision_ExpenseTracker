@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Form, Row } from "react-bootstrap";
 import { TransactionForm } from "./form/TransactionForm";
+import { Transactiontable } from "./layout/transaction-table/TransactionTable";
 import { MainLayout } from "./layout/MainLayout";
 
 export const Dashboard = () => {
@@ -10,6 +11,8 @@ export const Dashboard = () => {
       <Row>
         {/* <h3 className="mt-5">Dashboard</h3> */}
         <TransactionForm />
+        <hr className="m-5" />
+        <Transactiontable />
       </Row>
 
       {/* form section */}

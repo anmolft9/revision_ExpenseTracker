@@ -12,24 +12,22 @@ export const TransactionForm = () => {
   return (
     <div className="mt-5">
       <Form>
-        <Row>
-          <Col>
-            <DropdownButton
-              id="dropdown-basic-button"
-              title="Choose Transaction Type"
-            >
-              <Dropdown.Item href="#/action-1">Income</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Expense</Dropdown.Item>
-            </DropdownButton>
+        <Row className="g-2">
+          <Col md="2">
+            <Form.Select defaultValue="">
+              <option value="">Choose...</option>
+              <option value="Income">Income</option>
+              <option value="Expense">Expense</option>
+            </Form.Select>
           </Col>
-          <Col>
-            <Form.Control placeholder="First name" />
+          <Col md="5">
+            <Form.Control name="title" placeholder="Title" />
           </Col>
-          <Col>
-            <Form.Control placeholder="Last name" />
+          <Col md="2">
+            <Form.Control type="number" name="amount" placeholder="Amount" />
           </Col>
-          <Col>
-            <Button>Add Transaction</Button>
+          <Col md="2">
+            <Button type="submit">Add Transaction</Button>
           </Col>
         </Row>
       </Form>

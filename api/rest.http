@@ -24,3 +24,17 @@ Content-Type: application/json
    "password":"aaa"
 }
 
+
+#========transaction api
+### post new transaction
+POST http://localhost:8000/api/v1/transaction
+Content-Type: application/json
+
+{
+    "email":"assd@gmail.com",
+   "password":"aaa"
+}
+
+
+
+

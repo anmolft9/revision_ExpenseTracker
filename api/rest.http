@@ -31,9 +31,14 @@ POST http://localhost:8000/api/v1/transaction
 Content-Type: application/json
 
 {
-    "email":"assd@gmail.com",
-   "password":"aaa"
+    "userId":"630752f557b45746291820f0",
+   "type":"expense",
+   "title":"shopping",
+   "amount":300
 }
+### get the transaction
+GET http://localhost:8000/api/v1/transaction
+Authorization: 630752f557b45746291820f0
 
 
 

@@ -13,8 +13,9 @@ export const Dashboard = () => {
   }, []);
   const fetchData = async () => {
     const { status, message, result } = await getTransaction();
-    status === "success" && result.length && setTransaction();
-    console.log(data);
+    status === "success" && result.length && setTransaction(result);
+
+    console.log(result);
   };
   return (
     <MainLayout>
@@ -23,7 +24,7 @@ export const Dashboard = () => {
         {/* <h3 className="mt-5">Dashboard</h3> */}
         <TransactionForm />
         <hr className="m-5" />
-        <Transactiontable />
+        <Transactiontable transaction={transaction} />
       </Row>
 
       {/* form section */}

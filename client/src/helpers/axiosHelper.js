@@ -35,7 +35,27 @@ export const loginUser = async (obj) => {
 export const postNewTransaction = async (obj) => {
   try {
     const response = await axios.post(transactionEndPoint, obj);
-    console.log(response);
+    // console.log(response);
+    return response.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
+export const getTransaction = async (obj) => {
+  try {
+    const user = JSON.parse(sessionStorage.getItem("user"));
+
+    const userId = user._id;
+    const response = await axios.get(transactionEndPoint, obj, {
+      headers: {
+        authorization: userId,
+      },
+    });
+    // console.log(response);
     return response.data;
   } catch (error) {
     return {

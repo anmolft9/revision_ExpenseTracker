@@ -7,6 +7,7 @@ import {
   Form,
   Row,
 } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { postNewTransaction } from "../../helpers/axiosHelper";
 
 export const TransactionForm = () => {
@@ -23,8 +24,12 @@ export const TransactionForm = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    const result = await postNewTransaction;
+    // console.log(form);
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    // console.log(user);
+    const userId = user._id;
+    const { status, message } = await postNewTransaction({ ...form, userId });
+    toast[status](message);
   };
 
   return (

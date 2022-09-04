@@ -4,6 +4,7 @@ export const addTransaction = (obj) => {
   return TransactionSchema(obj).save();
 };
 
+//filter is an object
 export const getTransaction = (filter) => {
   return TransactionSchema.find(filter);
 };

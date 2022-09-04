@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Row } from "react-bootstrap";
 import { TransactionForm } from "./form/TransactionForm";
 import { Transactiontable } from "./layout/transaction-table/TransactionTable";
 import { MainLayout } from "./layout/MainLayout";
+import { getTransaction } from "../helpers/axiosHelper";
 
 export const Dashboard = () => {
+  const [transaction, setTransaction] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
+    const data = await getTransaction();
+    console.log(data);
+  };
   return (
     <MainLayout>
       <h3 className="mt-4 text-center">Dashboard</h3>

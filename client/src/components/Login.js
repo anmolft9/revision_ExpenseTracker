@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../helpers/axiosHelper";
 import { toast } from "react-toastify";
 
-export const Login = () => {
+export const Login = ({ setLoggedIn }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
@@ -17,9 +17,10 @@ export const Login = () => {
 
     const { status, message, user } = await loginUser({ email, password });
     toast[status](message);
-    console.log(user, status);
+    // console.log(user, status);
     if (status === "success") {
       window.sessionStorage.setItem("somethingELse", JSON.stringify(user));
+      setLoggedIn(true);
       navigate("/dashboard");
     }
   };

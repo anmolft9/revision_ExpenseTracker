@@ -35,7 +35,15 @@ export const TransactionForm = ({ postData }) => {
               <option value="expense">Expense</option>
             </Form.Select>
           </Col>
-          <Col md="5">
+          <Col md="3">
+            <Form.Control
+              name="date"
+              type="date"
+              onChange={handleOnChange}
+              required
+            />
+          </Col>
+          <Col md="3">
             <Form.Control
               name="title"
               placeholder="Title"

@@ -1,6 +1,7 @@
 import express from "express";
 import {
   addTransaction,
+  deleteTransaction,
   getTransaction,
 } from "../models/transaction/TransactionModel.js";
 
@@ -15,7 +16,7 @@ router.post("/", async (req, res, next) => {
     result?._id
       ? res.json({
           status: "success",
-          message: "Post router for transaction",
+          message: "Transaction Added successfully",
         })
       : res.json({
           status: "error",
@@ -40,6 +41,28 @@ router.get("/", async (req, res, next) => {
       message: "get router for transaction",
       result,
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/:_id", async (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+    const { _id } = req.params;
+    console.log(authorization, _id);
+    if (authorization && _id) {
+      const filter = { userId: authorization, _id };
+      const result = await deleteTransaction(filter);
+
+      if (result._id) {
+        res.json({
+          status: "success",
+          message: "transaction deleted",
+          result,
+        });
+      }
+    }
   } catch (error) {
     next(error);
   }

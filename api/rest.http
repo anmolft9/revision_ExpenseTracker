@@ -42,4 +42,10 @@ Authorization: 630752f557b45746291820f0
 
 
 
+### get the transaction
+DELETE http://localhost:8000/api/v1/transaction/6317069bada5369599b0dd1e
+Authorization: 630752f557b45746291820f0
+
+
+
 

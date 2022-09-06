@@ -15,6 +15,12 @@ const TransactionSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+
+    date: {
+      type: Date,
+      default: Date.now(),
+    },
+
     amount: {
       type: Number,
       require: true,

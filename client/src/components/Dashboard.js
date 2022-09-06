@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Row } from "react-bootstrap";
+import { Alert, Button, Form, Row } from "react-bootstrap";
 import { TransactionForm } from "./form/TransactionForm";
 import { Transactiontable } from "./layout/transaction-table/TransactionTable";
 import { MainLayout } from "./layout/MainLayout";
-import { getTransaction, postNewTransaction } from "../helpers/axiosHelper";
+import {
+  deleteTransaction,
+  getTransaction,
+  postNewTransaction,
+} from "../helpers/axiosHelper";
 import { toast } from "react-toastify";
 
 export const Dashboard = () => {
@@ -14,19 +18,27 @@ export const Dashboard = () => {
   }, []);
   const fetchData = async () => {
     const { status, message, result } = await getTransaction();
-    status === "success" && result.length && setTransaction(result);
-
-    console.log(result);
+    status === "success" && setTransaction(result);
   };
 
   const postData = async (form) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
-    // console.log(user);
+
     const userId = user._id;
     const { status, message } = await postNewTransaction({ ...form, userId });
     status === "success" && fetchData();
     toast[status](message);
   };
+
+  const handleOnDelete = async (_id) => {
+    if (!window.confirm("Are you sure you want to delete this transaction")) {
+      return;
+    }
+    const { status, message } = await deleteTransaction(_id);
+    status === "success" && fetchData();
+    toast[status](message);
+  };
+
   return (
     <MainLayout>
       <h3 className="mt-4 text-center">Dashboard</h3>
@@ -34,7 +46,10 @@ export const Dashboard = () => {
         {/* <h3 className="mt-5">Dashboard</h3> */}
         <TransactionForm postData={postData} />
         <hr className="m-5" />
-        <Transactiontable transaction={transaction} />
+        <Transactiontable
+          transaction={transaction}
+          handleOnDelete={handleOnDelete}
+        />
       </Row>
 
       {/* form section */}

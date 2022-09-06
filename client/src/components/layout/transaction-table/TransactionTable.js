@@ -1,6 +1,10 @@
 import Table from "react-bootstrap/Table";
 
 export const Transactiontable = ({ transaction }) => {
+  const total = transaction.reduce((acc, { type, amount }) => {
+    return type === "Income" ? acc + amount : acc - amount;
+  }, 0);
+  console.log(total);
   return (
     <>
       {console.log(transaction)}
@@ -31,7 +35,7 @@ export const Transactiontable = ({ transaction }) => {
           ))}
         </tbody>
       </Table>
-      <div className="text-end">Total : $ 300</div>
+      <div className="text-end">Total : {total} </div>
     </>
   );
 };

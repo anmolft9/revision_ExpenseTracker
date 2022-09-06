@@ -1,16 +1,7 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Col,
-  Dropdown,
-  DropdownButton,
-  Form,
-  Row,
-} from "react-bootstrap";
-import { toast } from "react-toastify";
-import { postNewTransaction } from "../../helpers/axiosHelper";
+import { Button, Col, Form, Row } from "react-bootstrap";
 
-export const TransactionForm = () => {
+export const TransactionForm = ({ postData }) => {
   const [form, setForm] = useState({});
 
   const handleOnChange = (e) => {
@@ -24,12 +15,8 @@ export const TransactionForm = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    // console.log(form);
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    // console.log(user);
-    const userId = user._id;
-    const { status, message } = await postNewTransaction({ ...form, userId });
-    toast[status](message);
+
+    postData(form);
   };
 
   return (
@@ -45,7 +32,7 @@ export const TransactionForm = () => {
             >
               <option value="">Choose...</option>
               <option value="Income">Income</option>
-              <option value="Expense">Expense</option>
+              <option value="expense">Expense</option>
             </Form.Select>
           </Col>
           <Col md="5">

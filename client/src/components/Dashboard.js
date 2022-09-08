@@ -22,7 +22,7 @@ export const Dashboard = ({ isLoggedIn }) => {
   };
 
   const postData = async (form) => {
-    const user = JSON.parse(sessionStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("somethingELse"));
 
     const userId = user._id;
     const { status, message } = await postNewTransaction({ ...form, userId });

@@ -47,7 +47,7 @@ export const postNewTransaction = async (obj) => {
 
 export const getTransaction = async () => {
   try {
-    const user = JSON.parse(sessionStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("somethingELse"));
 
     const userId = user._id;
     const response = await axios.get(transactionEndPoint, {
@@ -68,7 +68,7 @@ export const getTransaction = async () => {
 // delete transaction
 export const deleteTransaction = async (_id) => {
   try {
-    const user = JSON.parse(sessionStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("somethingELse"));
 
     const userId = user._id;
     const response = await axios.delete(transactionEndPoint + "/" + _id, {

@@ -9,12 +9,16 @@ import {
   postNewTransaction,
 } from "../helpers/axiosHelper";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { fetchDataActionddd } from "../pages/transaction/transactionAction.js";
 
 export const Dashboard = ({ isLoggedIn }) => {
   const [transaction, setTransaction] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchData();
+    dispatch(fetchDataActionddd());
+    // console.log(fetchDataActionddd());
   }, []);
   const fetchData = async () => {
     const { status, message, result } = await getTransaction();
